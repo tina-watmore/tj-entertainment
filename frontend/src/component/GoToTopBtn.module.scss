@@ -1,0 +1,32 @@
+@use '../css/mixin.scss' as mixin;
+
+.goToTopBtn {
+    position: fixed;
+    bottom:24px;
+    right:24px;
+    background: rgba(mixin.$site-color, 0.8);
+    border: none;
+    border-radius: 50%;
+    color: #FFF;
+    font-size: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    width: 54px;
+    height: 54px;
+    transition: all .3s;
+    z-index: 0;
+    opacity: 0;
+    i {
+        padding-bottom: 5px;
+    }
+
+    &.active {
+        z-index: 1;
+        opacity: 1;
+    }
+
+    &:hover {
+        background: rgba(mixin.$site-color,1);
+    }
+}

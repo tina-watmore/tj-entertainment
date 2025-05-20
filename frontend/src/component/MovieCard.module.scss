@@ -1,0 +1,218 @@
+@use '../css/mixin.scss' as mixin;
+
+.movieCardContainer {
+  position: relative;
+  overflow: hidden;
+  &.showInfoPopup {
+    .movieCard {
+      z-index: -1;
+    }
+    .movieInfoPopup {
+      opacity: 1;
+      z-index: 1;
+      left: 0;
+    }
+  }
+  .movieInfoPopup {
+    position: absolute;
+    width:100%;
+    top: 0;
+    left: -100%;
+    bottom: 0;
+    height: 100%;
+    color: #FFF;
+    background-color: rgba(0, 0, 0, 0.9);
+    opacity: 0;
+    z-index: -1;
+    transition: all 0.3s;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 40px 80px 40px 25px;
+    .releaseDate {
+      color: orange;
+      margin-bottom: 14px;
+    }
+    .overview {
+      line-height: 2;
+      margin-bottom: 20px;
+      display: -webkit-box;
+      -webkit-line-clamp: 12;
+      -webkit-box-orient: vertical;  
+      overflow: hidden;      
+    }
+    .genre {
+      span {
+        &:after {
+          content: ',  '
+        }
+      }
+      span:last-child:after {
+        display: none;
+      }
+    }
+    .ratingContainer {
+      position: absolute;
+      bottom: 24px;
+      right: 80px;
+      margin-top: 20px;
+      i {
+        font-size: 40px;
+        color: yellow;
+      }
+      .rating {
+        font-size: 22px;
+        position: absolute;
+        top: -7px;
+        left: 50px;
+        span {
+          position: absolute;
+          top: 5px;
+          left: 16px;          
+          color: whitesmoke;
+          font-size: 16px;
+        }
+      }
+      .count {
+        position: absolute;
+        left: 50px;
+        bottom: -2px;
+      }
+    }
+  }
+  .movieOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 1;
+    transition: opacity 0.2s;
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    z-index: 2;
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;    
+    }
+
+    button {
+      background: rgba(0, 0, 0, 0.3);
+      border: 3px solid #FFF;
+      color: #FFF;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      position: absolute;
+      right: 15px;
+      top: 20px;
+      cursor:pointer;
+      font-size: 16px;
+      transition: all 0.2s;
+    }
+
+    button.infoBtn {
+      i {
+        transition: all 0.2s;
+      }
+      i:nth-child(2) {
+        display: none;
+        opacity: 0;        
+      }
+      &.active {
+        i:nth-child(1) {
+          display: none;
+          opacity: 0;
+        }
+        i:nth-child(2) {
+          display: block;
+          opacity: 1;        
+        }
+      }
+    }
+
+    button.favourite {
+      top: 70px;
+      &.active {
+        border: 2px solid red;
+        color: red;
+      }
+    }
+
+    button.maybe {
+      top: 120px;
+      font-size: 20px;
+      &.active {
+        border: 2px solid orange;
+        color: orange;
+      }          
+    }        
+
+    button.bad {
+      top: 170px;
+      font-size: 20px;
+      &.active {
+        border-color: brown;
+        color: brown;
+      }                 
+    } 
+    
+    button.watched {
+      top: 220px;
+      &.active {
+        border: 2px solid greenyellow;
+        color: greenyellow;
+      }                 
+    }      
+  }  
+  .movieCard {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #1a1a1a;
+    transition: transform 0.2s;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;    
+    transition: all 0.2s;
+    .movieCard:hover {
+        transform: translateY(-5px);
+      }
+      
+      .moviePoster {
+        position: relative;
+        aspect-ratio: 2/3;
+        width: 100%;
+      }
+      
+      .moviePoster img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+                 
+      .movieInfo {
+        padding: 1rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .movieInfo h3 {
+        margin: 0;
+        color: #FFF;
+      }
+      
+      .movieInfo p {
+        color: #999;
+        font-size: 0.9rem;
+      }
+  }  
+}
+
+   

@@ -1,0 +1,106 @@
+@use '../css/mixin.scss' as mixin;
+
+.pageBanner {
+    background-color: mixin.$bg-banner;
+    background-image: url('/page-banner.png');
+    background-position: center center;
+    background-size: cover;
+    text-align: center;
+    color: #FFF;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+}
+
+.searchForm {
+    margin-top: 20px;
+
+    input {
+        height: 40px;
+        padding: 10px 15px;
+        border-radius: 8px;
+        border: 1px solid mixin.$bg-light;
+        display: block;
+        width: 80%;
+        max-width: 600px;
+        margin: 0 auto 20px;
+    }  
+
+    button {
+        width: 110px;
+        margin: 0 5px;
+    }
+}
+
+.quickLinks {
+    margin-top: 15px;
+}
+
+@media (min-width: 768px) {
+    .pageBanner {
+        height: 350px;
+    }    
+    .searchForm {
+        margin-top: 24px;
+    
+        input {
+            height: 46px;
+            margin: 0 auto 24px;
+        }  
+    
+        button {
+            width: 110px;
+            margin: 0 8px;
+        }
+    }
+    
+    .quickLinks {
+        margin-top: 20px;
+    }    
+}
+
+@media (min-width:1200px) {
+    .pageBanner {
+        height: 400px;
+    }    
+    .searchForm {
+        margin-top: 28px;
+    
+        input {
+            height: 50px;
+            margin: 0 auto 28px;
+        }  
+    
+        button {
+            width: 120px;
+            margin: 0 10px;
+        }
+    }
+    
+    .quickLinks {
+        margin-top: 28px;
+    }    
+}
+
+@media (min-width:1400px) {
+    .pageBanner {
+        height: 450px;
+    }    
+    .searchForm {
+        margin-top: 30px;
+    
+        input {
+            height: 60px;
+            margin: 0 auto 30px;
+        }  
+    
+        button {
+            width: 140px;
+        }
+    }
+    
+    .quickLinks {
+        margin-top: 30px;
+    }    
+}

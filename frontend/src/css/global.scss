@@ -1,0 +1,177 @@
+// global styles
+@use '../css/mixin.scss' as mixin;
+
+// general styles 
+body {
+    font-family: mixin.$font-family;
+    font-size: 14px;
+
+    .container {
+        padding: 0 10px;
+        max-width: 1400px;
+        margin: 0 auto;
+    }    
+
+    h1, h2, h3, h4, h5, h6 {
+        margin-top: 0;
+        margin-bottom: 16px;
+        line-height: 1;
+        letter-spacing: 2px;
+    }    
+
+    // mobile nav open
+    &.mobileNavOpen {
+        overflow: hidden;
+        position:relative;
+        #root::before {
+            content: '';
+            display: block;
+            position:absolute;
+            width: 100%; /* Full width (cover the whole page) */
+            height: 100%; /* Full height (cover the whole page) */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+            z-index: 1; /* Specify a stack order in case you're using a different order for other elements */
+            cursor: pointer; /* Add a pointer on hover */        
+        }
+
+        main {
+            z-index: -1;
+        }
+
+        .backToTopBtn {
+            position: fixed;
+            z-index: -1;
+        }    
+    }    
+
+    .styledBtn {
+        background-color: mixin.$site-color;
+        color: #FFF;
+        border: 1px solid mixin.$site-color;
+        text-transform: uppercase;
+        border-radius: 8px;
+        display: inline-block;
+        height: 40px;
+        padding: 0 20px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+    }
+    
+    .linkBtn {
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        color: #FFF;
+        text-decoration: underline;
+        margin: 0 10px;
+        cursor: pointer;
+    }    
+}
+
+// main styles 
+main {
+    padding-top: 70px;
+
+    .loading {
+        display: flex;
+        justify-content: center;
+        padding: 100px 20px;
+    }
+
+    .movieList {
+        margin: 20px 0;
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 15px;
+        padding: 15px;
+        width: 100%;
+    }   
+    
+    .innerPageContent {
+        .backupMessage {
+            padding: 100px 0;
+            text-align: center;
+        }       
+    }
+}
+
+@media (min-width: 768px) {
+    body {
+        font-size: 15px;
+
+        .container {
+            padding: 0 15px;
+        }
+
+        .styledBtn {
+            height: 44px;
+            padding: 0 24px;
+            font-size: 18px;
+        }        
+    }
+
+    main {  
+        .movieList {
+            margin: 30px 0;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            padding: 16px;
+        }    
+    }  
+}
+
+@media (min-width: 992px) {
+    body {
+        font-size: 16px;
+        .container {
+            padding: 0 20px;
+        }
+    }
+    main {
+        padding-top: 80px;
+
+        .movieList {
+            margin: 40px 0;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            padding: 18px;
+        }           
+    }
+}
+
+@media (min-width: 1400px) {
+    body {
+        font-size: 18px;
+    }
+    main {
+        padding-top: 100px;
+        .movieList {
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }           
+    }
+}
+
+@media (min-width: 1600px) {
+    main {
+        padding-top: 120px;       
+        .movieList {
+            grid-template-columns: repeat(5, 1fr);
+        }             
+    }
+}
+
+
+
+
+
+
+
+
+

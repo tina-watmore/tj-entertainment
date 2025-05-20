@@ -1,0 +1,12 @@
+@use '../css/mixin.scss' as mixin;
+
+footer {
+    background-color: mixin.$bg-main;
+    box-shadow: 0 -3px 9px rgba(51, 51, 51, 0.5);
+    color: #FFF;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    height: 70px;
+}
