@@ -14,7 +14,7 @@ export const MovieProvider = ({ children }) => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const res = await axios.get(`${REACT_APP_API_URL}/api/user/movies`, {
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/user/movies`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
           }
@@ -77,7 +77,7 @@ export const MovieProvider = ({ children }) => {
 
     // Save to backend
     try {
-      await axios.put(`${REACT_APP_API_URL}/api/user/movies`, {
+      await axios.put(`${process.env.REACT_APP_API_URL}/api/user/movies`, {
         favouriteMovies: updatedFavourite,
         maybeMovies: updatedMaybe,
         badMovies: updatedBad,
