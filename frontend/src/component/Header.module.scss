@@ -54,7 +54,7 @@ header {
             height: 100vh;
             li {
                 border-bottom: 1px solid mixin.$bg-light;
-                a {
+                button, a {
                     color: #FFF;
                     text-decoration: none;
                     display: flex;
@@ -62,9 +62,11 @@ header {
                     height: 56px;
                     padding: 0 25px;
                     text-transform: uppercase;
-                    font-size: 18px;                
+                    font-size: 18px;         
+                    background-color: transparent;
+                    border: none;       
                 }
-                a:hover {
+                button:hover, a:hover {
                     background-color: mixin.$site-color;
                 }
                 a[aria-current="page"] {

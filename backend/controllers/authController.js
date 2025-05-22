@@ -2,7 +2,7 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET = 'your_jwt_secret_here'; // Use env variable in production
+const JWT_SECRET = process.env.JWT_SECRET; // Use env variable in production
 
 // Register
 exports.register = async (req, res) => {
@@ -38,7 +38,7 @@ exports.login = async (req, res) => {
 
     // Find user
     const user = await User.findOne({ email });
-    if (!user) return res.status(404).json({ message: 'User not found' });
+    if (!user) return res.status(404).json({ message: 'Invalid credentials' });
 
     // Compare passwords
     const isMatch = await bcrypt.compare(password, user.password);
@@ -52,3 +52,4 @@ exports.login = async (req, res) => {
     res.status(500).json({ message: 'Login failed', error: err.message });
   }
 };
+

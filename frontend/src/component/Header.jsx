@@ -1,10 +1,12 @@
 import styles from './Header.module.scss';
 import { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router';
+import { useAuth } from '../context/AuthContext';
 
 
 export const Header = () => {
     const [navOpen, setNavOpen] = useState(false);
+    const { user } = useAuth();
     const location = useLocation();
 
     useEffect(() => {       
@@ -14,6 +16,8 @@ export const Header = () => {
     useEffect(() => {
         document.body.classList.toggle('mobileNavOpen');
     }, [navOpen]);
+
+    const { logout } = useAuth();
 
     const navItems = [
         {
@@ -50,20 +54,27 @@ export const Header = () => {
                     <Link className={styles.navbarBrand} to='/'>
                         <img className={styles.logo} src='/tj_entertainment_logo-transparent.png' alt='TJ Entertainment' />
                     </Link>
-                    <button onClick={() => setNavOpen(!navOpen)} className={styles.navbarToggler} type='button' aria-label='Toggle navigation'>
-                        <i className={navOpen ? 'fa fa-times' : 'fa fa-bars'} />
-                    </button>
-                    <div id='navbarNav' className={`${styles.navbarNav} ${navOpen ? styles.open : ''}`}>
-                        <ul className={styles.navbarLinks} role='list'>
-                            {
-                                navItems.map((navItem) => (
-                                    <li key={navItem.id} className={styles.navItem}>
-                                        <NavLink to={navItem.url}>{navItem.title}</NavLink>
-                                    </li>
-                                ))
-                            }
-                        </ul>
-                    </div>
+                    {
+                        user ? (
+                            <>
+                                <button onClick={() => setNavOpen(!navOpen)} className={styles.navbarToggler} type='button' aria-label='Toggle navigation'>
+                                    <i className={navOpen ? 'fa fa-times' : 'fa fa-bars'} />
+                                </button>
+                                <div id='navbarNav' className={`${styles.navbarNav} ${navOpen ? styles.open : ''}`}>
+                                    <ul className={styles.navbarLinks} role='list'>
+                                        {
+                                            navItems.map((navItem) => (
+                                                <li key={navItem.id} className={styles.navItem}>
+                                                    <NavLink to={navItem.url}>{navItem.title}</NavLink>
+                                                </li>
+                                            ))
+                                        }
+                                        <li><button onClick={logout}>Logout</button></li>
+                                    </ul>
+                                </div>
+                            </>
+                        ) : ''
+                    }
                 </nav>       
             </div>
         </header>   
