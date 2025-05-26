@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createContext, useContext, useState, useEffect } from "react";
+import { useAuth } from '../context/AuthContext';
 
 const MovieContext = createContext();
 
@@ -10,27 +11,31 @@ export const MovieProvider = ({ children }) => {
   const [maybeMovies, setMaybeMovies] = useState([]);
   const [badMovies, setBadMovies] = useState([]);
   const [watchedMovies, setWatchedMovies] = useState([]);
+  const { user } = useAuth();
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/user/movies`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`
-          }
-        });
-
-        setFavouriteMovies(res.data.favouriteMovies || []);
-        setMaybeMovies(res.data.maybeMovies || []);
-        setBadMovies(res.data.badMovies || []);
-        setWatchedMovies(res.data.watchedMovies || []);
-      } catch (error) {
-        console.error('Failed to load movie lists:', error.response?.data || error.message);
-      }
-    };
+    if(!user) return;
 
     fetchMovies();
   }, []);  
+
+  const fetchMovies = async () => {
+    try {
+      console.log('try');
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/user/movies`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      console.log("res", res);
+      setFavouriteMovies(res.data.favouriteMovies || []);
+      setMaybeMovies(res.data.maybeMovies || []);
+      setBadMovies(res.data.badMovies || []);
+      setWatchedMovies(res.data.watchedMovies || []);
+    } catch (error) {
+      console.error('Failed to load movie lists:', error.response?.data || error.message);
+    }
+  };  
 
   const movieLists = {
     favourite: { list: favouriteMovies, setList: setFavouriteMovies },
@@ -77,7 +82,7 @@ export const MovieProvider = ({ children }) => {
 
     // Save to backend
     try {
-      await axios.put(`${process.env.REACT_APP_API_URL}/api/user/movies`, {
+      await axios.put(`${import.meta.env.VITE_API_URL}/api/user/movies`, {
         favouriteMovies: updatedFavourite,
         maybeMovies: updatedMaybe,
         badMovies: updatedBad,
@@ -102,7 +107,8 @@ export const MovieProvider = ({ children }) => {
     maybeMovies,
     badMovies,
     watchedMovies,
-    isInMovieList
+    isInMovieList,
+    fetchMovies
   }
 
   return (

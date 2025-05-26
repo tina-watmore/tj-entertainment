@@ -10,3 +10,15 @@ footer {
     display: flex;
     height: 70px;
 }
+
+@media (min-width: 992px) {
+    footer {
+        height: 80px;
+    }
+}
+
+@media (min-width: 1400px) {
+    footer {
+        height:100px;
+    }
+}

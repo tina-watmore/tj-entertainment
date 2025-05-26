@@ -5,20 +5,23 @@ import { getMoviesById } from "../services/api";
 import { useState, useEffect } from "react";
 
 export const Favourites = () => {   
-    const { favouriteMovies } = useMovieContext();
+    const { favouriteMovies, watchedMovies } = useMovieContext();
     const [fetchedMovies, setFetchedMovies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
     useEffect(() => {
         fetchFavourites();
-    }, [favouriteMovies]);
+    }, [favouriteMovies, watchedMovies]);
 
     const fetchFavourites = async () => {
         try {
+            const unwatchedFavourites = favouriteMovies.filter(
+            (id) => !watchedMovies.includes(id)
+            );  
             const results = await Promise.all(
-                favouriteMovies.map(id => getMoviesById(id))
-            );            
+                unwatchedFavourites.map(id => getMoviesById(id))
+            );                   
             setFetchedMovies(results);
         } catch (err) {
             setError('Failed to load favourite movies.')

@@ -5,19 +5,22 @@ import { getMoviesById } from "../services/api";
 import { useState, useEffect } from "react";
 
 export const Maybes = () => {   
-    const { maybeMovies } = useMovieContext();
+    const { maybeMovies, watchedMovies } = useMovieContext();
     const [fetchedMaybeMovies, setFetchedMaybeMovies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
     useEffect(() => {
         fetchMaybes();
-    }, [maybeMovies]);
+    }, [maybeMovies, watchedMovies]);
 
     const fetchMaybes = async () => {
         try {
+            const unwatchedMaybes = maybeMovies.filter(
+                (id) => !watchedMovies.includes(id) 
+            );
             const results = await Promise.all(
-                maybeMovies.map(id => getMoviesById(id))
+                unwatchedMaybes.map(id => getMoviesById(id))
             );
             setFetchedMaybeMovies(results);
         } catch (err) {

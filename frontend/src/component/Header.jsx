@@ -69,7 +69,7 @@ export const Header = () => {
                                                 </li>
                                             ))
                                         }
-                                        <li><button onClick={logout}>Logout</button></li>
+                                        <li><button onClick={logout}><i className="fa fa-sign-out" aria-hidden="true"></i><span>Logout</span></button></li>
                                     </ul>
                                 </div>
                             </>

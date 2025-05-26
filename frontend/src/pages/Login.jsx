@@ -2,11 +2,13 @@ import styles from './login.module.scss';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
+import { useMovieContext } from '../context/MovieContext';
 import { useNavigate } from 'react-router-dom';
 
 export const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
+  const { fetchMovies } = useMovieContext();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -26,8 +28,8 @@ export const Login = () => {
         password,
       });
       login({ id: res.data.userId }, res.data.token);
+      fetchMovies();
       navigate('/'); // Redirect to home
-
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed');
     }
